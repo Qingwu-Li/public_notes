@@ -1,68 +1,60 @@
-> ```
-> git remote add kernelorg https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-> git fetch kernelorg
-> ```
->
-> 
+# Git cherry-pick
 
-6 new patches in v5.9.15
+```
+git remote add kernelorg https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+git fetch kernelorg
+```
 
->  » git log --oneline leica/5.4-2.1.x-imx/crocodile..v5.9.15 -- \
->  drivers/power/supply/bq27xxx_battery.c \
->  drivers/power/supply/bq27xxx_battery_hdq.c \
->  drivers/power/supply/bq27xxx_battery_i2c.c include/linux/power/bq27xxx_battery.h | tee /dev/null
->  
->  730c9df7b73b Krzysztof Kozlowski      6 weeks ago  power: supply: bq27xxx: report "not charging" on all types
->  707d678a5c7c Dan Murphy              5 months ago  power: supply: bq27xxx_battery: Add the BQ28z610 Battery monitor
->  6f24ff97e323 Dan Murphy              5 months ago  power: supply: bq27xxx_battery: Add the BQ27Z561 Battery monitor
->  81bd45fc36e3 Alexander A. Klimov     5 months ago  power: supply: bq2xxxx: Replace HTTP links with HTTPS ones
->  149ed3d404c9 Pali Rohár              8 months ago  change email address for Pali Rohár
->  583b53ece0b0 Dmitry Osipenko         9 months ago  power: supply: bq27xxx_battery: Silence deferred-probe error
+# new patches in v5.9.15
 
-2 of them are already part (backported) of crocodile branch
+```
+git log --oneline leica/5.4-2.1.x-imx/crocodile..v5.9.15 -- \
+drivers/power/supply/bq27xxx_battery.c \
+drivers/power/supply/bq27xxx_battery_hdq.c \
+drivers/power/supply/bq27xxx_battery_i2c.c include/linux/power/bq27xxx_battery.h | tee /dev/null
+  
+730c9df7b73b Krzysztof Kozlowski      6 weeks ago  power: supply: bq27xxx: report "not charging" on all types
+707d678a5c7c Dan Murphy              5 months ago  power: supply: bq27xxx_battery: Add the BQ28z610 Battery monitor
+6f24ff97e323 Dan Murphy              5 months ago  power: supply: bq27xxx_battery: Add the BQ27Z561 Battery monitor
+81bd45fc36e3 Alexander A. Klimov     5 months ago  power: supply: bq2xxxx: Replace HTTP links with HTTPS ones
+149ed3d404c9 Pali Rohár              8 months ago  change email address for Pali Rohár
+583b53ece0b0 Dmitry Osipenko         9 months ago  power: supply: bq27xxx_battery: Silence deferred-probe error
+```
+ of them are already part (backported) of crocodile branch
 
->  » git log --oneline v5.9.15..leica/5.4-2.1.x-imx/crocodile -- \
->  drivers/power/supply/bq27xxx_battery.c \
->  drivers/power/supply/bq27xxx_battery_hdq.c \
->  drivers/power/supply/bq27xxx_battery_i2c.c include/linux/power/bq27xxx_battery.h | tee /dev/null
->  
->  a10ed3b55fed Krzysztof Kozlowski      6 weeks ago  power: supply: bq27xxx: report "not charging" on all types
->  b7dee304aa0e Dmitry Osipenko         8 months ago  power: supply: bq27xxx_battery: Silence deferred-probe error
+```
+git log --oneline v5.9.15..leica/5.4-2.1.x-imx/crocodile -- \
+drivers/power/supply/bq27xxx_battery.c \
+drivers/power/supply/bq27xxx_battery_hdq.c \
+drivers/power/supply/bq27xxx_battery_i2c.c include/linux/power/bq27xxx_battery.h | tee /dev/null
+a10ed3b55fed Krzysztof Kozlowski      6 weeks ago  power: supply: bq27xxx: report "not charging" on all types
+b7dee304aa0e Dmitry Osipenko         8 months ago  power: supply: bq27xxx_battery: Silence deferred-probe error
+81bd45fc36e3 Alexander A. Klimov     5 months ago  power: supply: bq2xxxx: Replace HTTP links with HTTPS ones
+149ed3d404c9 Pali Rohár              8 months ago  change email address for Pali Rohár
+707d678a5c7c Dan Murphy              5 months ago  power: supply: bq27xxx_battery: Add the BQ28z610 Battery monitor
+6f24ff97e323 Dan Murphy              5 months ago  power: supply: bq27xxx_battery: Add the BQ27Z561 Battery monitor
+```
 
-2 are not needed (email, URL staff)
+# cherry-pick them one-by one, starting with the oldest one
 
-> 81bd45fc36e3 Alexander A. Klimov     5 months ago  power: supply: bq2xxxx: Replace HTTP links with HTTPS ones
->  149ed3d404c9 Pali Rohár              8 months ago  change email address for Pali Rohár
-
-2 are left
-
-> 707d678a5c7c Dan Murphy              5 months ago  power: supply: bq27xxx_battery: Add the BQ28z610 Battery monitor
->  6f24ff97e323 Dan Murphy              5 months ago  power: supply: bq27xxx_battery: Add the BQ27Z561 Battery monitor
-
-cherry-pick them one-by one, starting with the oldest one
-
->  » git cherry-pick --edit -s -x 6f24ff97e323
->   » git status -s
+```
+git cherry-pick --edit -s -x 6f24ff97e323
+git status -s
+```
 
 fix conflicts and commit
 
->  » vim drivers/power/supply/bq27xxx_battery.c
->   » git add drivers/power/supply/bq27xxx_battery.c
->   » git commit -s
+```
+vim drivers/power/supply/bq27xxx_battery.c
+git add drivers/power/supply/bq27xxx_battery.c
+git commit -s
+```
 
 same for the second patch
 
->  » git cherry-pick --edit -s -x 707d678a5c7c
-
-no conflicts as we could see
-
-
-
-[linux-5.9.y](https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/log/?h=linux-5.9.y)
-
-
-
-git cherry-pick --abort
+```
+git cherry-pick --edit -s -x 707d678a5c7c
+```
 
 
 
@@ -144,7 +136,7 @@ git log --oneline STMicr/linux-4.19.y-gh..leica/5.4-2.1.x-imx/crocodile \
 liqiw@aherlnxbspsrv01:/development/bsp-user-workspaces/liqiw/Magnetometer/linux-leica$
 
  git log --oneline leica/5.4-2.1.x-imx/crocodile..STMicr/linux-4.19.y-gh \
->  -- \drivers/iio/magnetometer/st_mag40_buffer.c \
+-- \drivers/iio/magnetometer/st_mag40_buffer.c \
 > drivers/iio/magnetometer/st_mag40_core.c \
 > drivers/iio/magnetometer/st_mag40_core.h \
 > drivers/iio/magnetometer/st_mag40_i2c.c \
@@ -207,22 +199,15 @@ git log --oneline leica/5.4-2.1.x-imx/crocodile.. v5.9.15 -- drivers/power/suppl
 
 
 
+```
 git log --oneline kernelorg/master..power_supply_master  -- drivers/power/supply/bq27xxx_battery.c drivers/power/supply/bq27xxx_battery_hdq.c drivers/power/supply/bq27xxx_battery_i2c.c include/linux/power/bq27xxx_battery.h | tee /dev/null
-
-
 
 git log --oneline kernelorg/master..kernelorg/power_supply_master  -- drivers/power/supply/bq27xxx_battery.c drivers/power/supply/bq27xxx_battery_hdq.c drivers/power/supply/bq27xxx_battery_i2c.c include/linux/power/bq27xxx_battery.h | tee /dev/null
 
-
-
 /data2/liqiw/geosurv/build-output/work-shared/crocodile/kernel-source/include/linux/device.h
-
-
 
 git log --oneline power_supply_master.. kernelorg/master -- drivers/power/supply/bq27xxx_battery.c drivers/power/supply/bq27xxx_battery_hdq.c drivers/power/supply/bq27xxx_battery_i2c.c include/linux/power/bq27xxx_battery.h include/linux/device.h | tee /dev/null
 
-
-
-
-
 git log --oneline kernelorg/master.. power_supply_master -- drivers/power/supply/bq27xxx_battery.c drivers/power/supply/bq27xxx_battery_hdq.c drivers/power/supply/bq27xxx_battery_i2c.c include/linux/power/bq27xxx_battery.h include/linux/device.h | tee /dev/null
+```
+

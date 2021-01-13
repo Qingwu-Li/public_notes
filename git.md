@@ -2,15 +2,35 @@
 
 http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/zh_cn/
 
-Install
+# Install
+
+## windows
+
+https://git-scm.com/download/win
+
+https://desktop.github.com/
+
+https://www.sourcetreeapp.com/
+
+## ubuntu
 
 ```
- sudo apt install git-all
+sudo apt install git-all
 ```
 
+### create a new repository
 
+```
+echo "# public_notes" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Qingwu-Li/public_notes.git
+git push -u origin main
+```
 
-# clone
+# clone a repository
 
 ```
 git clone https://github.com/Qingwu-Li/linux-leica.git
@@ -137,7 +157,7 @@ git clean -fd
 
 
 
-# add/commit/push
+# add/commit/push to a branch
 
 
 
@@ -155,7 +175,6 @@ git branch fix-show-build-date
 git log 
 git remote -v
 git push --set-upstream origin fix-show-build-date
-
 git push --set-upstream origin battery-bq78z100
 ```
 
